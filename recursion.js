@@ -69,28 +69,46 @@ function revString(str) {
 
   if (str.length < 2) return str;
 
-  return [str[str.length], ...revString(str.slice(0, -1))].join("");
+  return [str[str.length - 1], ...revString(str.slice(0, -1))].join("");
 }
 
 /** findIndex: return the index of val in arr (or -1 if val is not present). */
 
-function findIndex(arr, val) {}
+function findIndex(arr, val) {
+  // ("pony")
+  // ["duck", "cat", "pony"] -> ["duck", ...unknown]
+  // ["cat", "pony"] -> ["cat", ...unknown]
+  // ["pony"] -> ["pony"]
+  // output arr.length-1
+
+  let indexCounter = 0;
+
+  if (arr.length === 0) {
+    return -1;
+  } else if (arr[0] !== val) {
+    indexCounter += findIndex(arr.slice(1));
+  } else {
+    return 1;
+  }
+
+  return indexCounter - 1;
+}
 
 /** gatherStrings: given an object, return an array of all of the string values. */
 
-function gatherStrings(obj) {}
+function gatherStrings(obj) { }
 
 // FURTHER STUDY
 
 /** binarySearch: given a sorted array of numbers, and a value,
  * return true if val is in array, false if not present). */
 
-function binarySearch(arr, val) {}
+function binarySearch(arr, val) { }
 
 /** binarySearch: given a sorted array of numbers, and a value,
  * return the index of that value (or -1 if val is not present). */
 
-function binarySearchIndex(arr, val) {}
+function binarySearchIndex(arr, val) { }
 
 // you might find the above two problems easier if you change the function signature to:
 //
