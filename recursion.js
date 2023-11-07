@@ -96,7 +96,7 @@ function gatherStrings(obj) {
   for (let key in obj) {
     if (typeof obj[key] === "object") {
       // strings.push(gatherStrings(obj[key]));
-      strings = [strings, ...gatherStrings(obj[key])];
+      strings = [...strings, ...gatherStrings(obj[key])];
     } else if (typeof obj[key] === "string") {
       strings.push(obj[key]);
     }
@@ -110,12 +110,50 @@ function gatherStrings(obj) {
 /** binarySearch: given a sorted array of numbers, and a value,
  * return true if val is in array, false if not present). */
 
-function binarySearch(arr, val) {}
+function binarySearch(arr, val) {
+  let low = arr[0];
+  let high = arr[arr.length - 1];
+
+  if (arr.length <= 2) {
+    if (arr[0] === val) {
+      return true;
+    } else if (arr[1] === val) {
+      return true;
+    }
+  }
+
+  // while (low <= high) {
+  //   let mid = Math.floor((low + high) / 2);
+  //   let guess = arr[mid];
+
+  //   if (guess === val) {
+  //     return true;
+  //   } else if (guess > val) {
+  //     high = mid - 1;
+  //   } else {
+  //     low = mid + 1;
+  //   }
+  // }
+
+  let mid = Math.floor((low + high) / 2);
+  let guess = arr[mid];
+
+  if (guess === val) {
+    return true;
+  } else if (guess > val) {
+    return binarySearch();
+  } else if (guess < val) {
+    return binarySearch();
+  } else {
+    return false;
+  }
+
+}
 
 /** binarySearch: given a sorted array of numbers, and a value,
  * return the index of that value (or -1 if val is not present). */
 
-function binarySearchIndex(arr, val) {}
+function binarySearchIndex(arr, val) { }
 
 // you might find the above two problems easier if you change the function signature to:
 //
