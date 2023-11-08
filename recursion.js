@@ -111,29 +111,18 @@ function gatherStrings(obj) {
  * return true if val is in array, false if not present). */
 
 function binarySearch(arr, val) {
-  let low = arr[0];
-  let high = arr[arr.length - 1];
+  let low = 0;
+  let high = arr.length - 1;
 
   if (arr.length <= 2) {
     if (arr[0] === val) {
       return true;
     } else if (arr[1] === val) {
       return true;
+    } else {
+      return false;
     }
   }
-
-  // while (low <= high) {
-  //   let mid = Math.floor((low + high) / 2);
-  //   let guess = arr[mid];
-
-  //   if (guess === val) {
-  //     return true;
-  //   } else if (guess > val) {
-  //     high = mid - 1;
-  //   } else {
-  //     low = mid + 1;
-  //   }
-  // }
 
   let mid = Math.floor((low + high) / 2);
   let guess = arr[mid];
@@ -141,19 +130,31 @@ function binarySearch(arr, val) {
   if (guess === val) {
     return true;
   } else if (guess > val) {
-    return binarySearch();
-  } else if (guess < val) {
-    return binarySearch();
+    return binarySearch(arr.slice(0, mid), val);
   } else {
-    return false;
+    return binarySearch(arr.slice(mid), val);
   }
-
 }
 
 /** binarySearch: given a sorted array of numbers, and a value,
  * return the index of that value (or -1 if val is not present). */
 
-function binarySearchIndex(arr, val) { }
+function binarySearchIndex(arr, val, low, high = arr.length) {
+  if (low <= high) {
+    const mid = Math.floor((low + high) / 2);
+    const guess = arr[mid];
+
+    if (guess === val) {
+      return 0;
+    } else if (guess > val) {
+      return 1 + binarySearchIndex(arr.slice(0, mid), val, low, mid - 1);
+    } else {
+      return 1 + binarySearchIndex(arr.slice(0, mid), val, mid + 1, high);
+    }
+  }
+
+  return -1;
+}
 
 // you might find the above two problems easier if you change the function signature to:
 //
