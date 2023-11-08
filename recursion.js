@@ -108,7 +108,10 @@ function gatherStrings(obj) {
 // FURTHER STUDY
 
 /** binarySearch: given a sorted array of numbers, and a value,
- * return true if val is in array, false if not present). */
+ * return true if val is in array, false if not present).
+ *
+ * Solved our own way
+ */
 
 function binarySearch(arr, val) {
   let low = 0;
@@ -137,19 +140,22 @@ function binarySearch(arr, val) {
 }
 
 /** binarySearch: given a sorted array of numbers, and a value,
- * return the index of that value (or -1 if val is not present). */
+ * return the index of that value (or -1 if val is not present).
+ *
+ * Solved the book way -> grokking algorithms
+ */
 
-function binarySearchIndex(arr, val, low, high = arr.length) {
+function binarySearchIndex(arr, val, low = 0, high = arr.length) {
   if (low <= high) {
     const mid = Math.floor((low + high) / 2);
     const guess = arr[mid];
 
     if (guess === val) {
-      return 0;
+      return mid;
     } else if (guess > val) {
-      return 1 + binarySearchIndex(arr.slice(0, mid), val, low, mid - 1);
+      return binarySearchIndex(arr, val, low, mid - 1);
     } else {
-      return 1 + binarySearchIndex(arr.slice(0, mid), val, mid + 1, high);
+      return binarySearchIndex(arr, val, mid + 1, high);
     }
   }
 
